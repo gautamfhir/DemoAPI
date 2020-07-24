@@ -36,11 +36,15 @@ jobs:
         package: '${{env.PUBLISH_PATH}}/publish'
  
     - name: Newman Action
-    - uses: actions/setup-node@v2-beta
+      uses: actions/setup-node@v2-beta
       with:
         node-version: '12'
         collectionID: ff1f08aa-bf27-4ffc-8d82-72dd2cc80110
         environmentID: 21c61307-4468-4931-9c4c-3ba2266c3cec
-    - run: npm install -g newman
-    - run: newman run "https://api.getpostman.com/collections/${{collectionID}}?apikey=${{ secrets.POSTMANAPIKEY }}" --environment "https://api.getpostman.com/environments/${{ environmentID }}?apikey=${{ secrets.POSTMANAPIKEY }}"
+        
+    - name: Install 
+      run: npm install -g newman
+    
+    - name: Run Newman 
+      run: newman run "https://api.getpostman.com/collections/${{collectionID}}?apikey=${{ secrets.POSTMANAPIKEY }}" --environment "https://api.getpostman.com/environments/${{ environmentID }}?apikey=${{ secrets.POSTMANAPIKEY }}"
 
