@@ -38,6 +38,10 @@ jobs:
     - name: Newman Action
       uses: matt-ball/newman-action@0.0.28
       with:
-        apiKey: PMAK-5f1a33b5b0236f0042b9aec7-d5f96d4a3ab048a2b9c9f796ddf7acae18
+        apiKey: ${{secrets.POSTMAN_API_KEY}}
         collection: ff1f08aa-bf27-4ffc-8d82-72dd2cc80110
         environment: 21c61307-4468-4931-9c4c-3ba2266c3cec
+    
+    - run: npm install -g newman
+    - run: newman run "https://api.getpostman.com/collections/ff1f08aa-bf27-4ffc-8d82-72dd2cc80110?apikey=${{secrets.POSTMAN_API_KEY}}" 
+
